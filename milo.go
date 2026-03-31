@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -17,14 +19,14 @@ func lower(If string) string {
 	return strings.ToLower(If)
 }
 
-// func reverse(two string) string {
-// 	r := []rune(two)
-// 	for i, j := 0, len(r)-1; i < j; i, j = i+1, j-1 {
-// 		r[i], r[j] = r[j], r[i]
-// 	}
-// 	return strings.Join(r, " ")
+func reverse(two string) string {
+	r := []rune(two)
+	for i, j := 0, len(r)-1; i < j; i, j = i+1, j-1 {
+		r[i], r[j] = r[j], r[i]
+	}
+	return string(r)
 
-// }
+}
 
 func title(one string) string {
 	the := map[string]bool{
@@ -63,24 +65,36 @@ func snake(lolipop string) string {
 }
 
 func main() {
-	var me string
-	fmt.Println("Enter word:")
-	fmt.Scanln(&me)
+	Reader := bufio.NewReader(os.Stdin)
+	for {
+		fmt.Println("upper", "lower", "title", "reverse","snake","cap", "Quit")
+		fmt.Println("Enter word:")
+		me, _ := Reader.ReadString('\n')
+		me = strings.TrimSpace(me)
 
-	var operation string
-	fmt.Println("upper", "lower", "title", "reverse", "Quit")
-	fmt.Scanln(&operation)
-	switch operation {
-	case "upper":
-		fmt.Println(upper(me))
-	case "lower":
-		fmt.Println(lower(me))
-	case "title":
-		fmt.Println(title(me))
-	// case "reverse":
-	// 	fmt.Println(reverse(me))
-	case "quit":
-		fmt.Println("Goodbye")
+		text := strings.Fields(me)
+		operation := text[0]
+		word := text[1:]
+		words := strings.Join(word, " ")
+		if len(words) <= 1 {
+			fmt.Println("No text Provided")
+			continue
+		}
+		switch operation {
+		case "upper":
+			fmt.Println(upper(words))
+		case "lower":
+			fmt.Println(lower(words))
+		case "snake":
+		    fmt.Println(snake(words))
+		case "cap":
+			fmt.Println(cap(words))
+		case "title":
+			fmt.Println(title(words))
+		case "reverse":
+			fmt.Println(reverse(words))
+		case "quit":
+			fmt.Println("Goodbye")
+		}
 	}
-
 }
