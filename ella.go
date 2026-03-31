@@ -34,7 +34,6 @@ func main() {
 		switch operation {
 		case "hex":
 			fmt.Println(convert(input))
-
 		case "bin":
 			fmt.Println(good(input))
 		case "dec":
