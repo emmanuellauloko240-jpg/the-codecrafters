@@ -1,0 +1,3 @@
+# operators 
+
+An operator is a symbol that performs an action on data, like adding numbers, comparing values, or changing a variable. etc...
